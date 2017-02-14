@@ -1,0 +1,108 @@
+﻿<Window x:Class="_538_Rule_Riddler_Nation_Solver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding TopFive}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="50" Header="Wins"
+                                    DisplayMemberBinding="{Binding Wins}"/>
+                    <GridViewColumn Width="50" Header="Ties"
+                                    DisplayMemberBinding="{Binding Ties}"/>
+                    <GridViewColumn Width="50" Header="Losses"
+                                    DisplayMemberBinding="{Binding Losses}"/>
+                    <GridViewColumn Width="Auto" Header="Comment"
+                                    DisplayMemberBinding="{Binding Comment, FallbackValue='No comment'}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1">
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Margin" Value="4,0,4,0"/>
+                    </Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Margin" Value="0,2,0,5"/>
+                    </Style>
+                </StackPanel.Resources>
+                <StackPanel>
+                    <TextBlock Text="Castle 1"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleOne}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 2"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleTwo}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 3"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleThree}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 4"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleFour}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 5"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleFive}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 6"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleSix}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 7"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleSeven}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 8"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleEight}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 9"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleNine}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Castle 10"/>
+                    <TextBox Width="20" 
+                           Text="{Binding CastleTen}"/>
+                </StackPanel>
+            </StackPanel>
+            <Grid Height="Auto">
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="50" Margin="20,0,10,0" 
+                        Content="Run"
+                            Command="{Binding RunCommand}"/>
+                    <TextBlock Text="Wins:" VerticalAlignment="Center"/>
+                    <TextBox Width="40" Margin="5,0,5,0" 
+                         Text="{Binding Player.Wins}"/>
+                    <TextBlock Text="Ties:" VerticalAlignment="Center"/>
+                    <TextBox Width="40" Margin="5,0,5,0"
+                         Text="{Binding Player.Ties}"/>
+                    <TextBlock Text="Losses:" VerticalAlignment="Center"/>
+                    <TextBox Width="40" Margin="5,0,5,0"
+                         Text="{Binding Player.Losses}"/>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</Window>

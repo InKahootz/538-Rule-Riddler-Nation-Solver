@@ -11,7 +11,7 @@ namespace _538_Rule_Riddler_Nation_Solver
 
     using _538_Rule_Riddler_Nation_Solver.Annotations;
 
-    class PropertiesChangedBase : INotifyPropertyChanged
+    public class PropertiesChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -22,7 +22,7 @@ namespace _538_Rule_Riddler_Nation_Solver.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -63,7 +63,9 @@ namespace _538_Rule_Riddler_Nation_Solver.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Castle 1,Castle 2,Castle 3,Castle 4,Castle 5,Castle 6,Castle 7,Castle 8,Castle 9,Castle 10,Why did you choose your troop deployment?
         ///100,0,0,0,0,0,0,0,0,0,&quot;because, I am number one!&quot;
-        ///52,2,2,2,2,2,2,12,12,12,&quot;I need to win at least 4 castles to win the game. Any combination of 7 castles wins the game. I assume that the border cases of trying to win 1-7 or 1 and 8-10 will be popular. If possible, I should like to be able to beat either strategy.        ///        ///One way to do that would be to play minimally on all numbers  [rest of string was truncated]&quot;;.
+        ///52,2,2,2,2,2,2,12,12,12,&quot;I need to win at least 4 castles to win the game. Any combination of 7 castles wins the game. I assume that the border cases of trying to win 1-7 or 1 and 8-10 will be popular. If possible, I should like to be able to beat either strategy.
+        ///
+        ///One way to do that would be to play minimally on all numbers  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string castle_solutions {
             get {

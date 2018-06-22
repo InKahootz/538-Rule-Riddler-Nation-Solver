@@ -3,14 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_538_Rule_Riddler_Nation_Solver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" SizeToContent="Width" Height="500"
+        d:DataContext="{d:DesignInstance Type=local:ViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" ItemsSource="{Binding TopFive}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="550"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding AllCommanders}" MinHeight="200">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" Header="Wins"
@@ -19,8 +25,16 @@
                                     DisplayMemberBinding="{Binding Ties}"/>
                     <GridViewColumn Width="50" Header="Losses"
                                     DisplayMemberBinding="{Binding Losses}"/>
-                    <GridViewColumn Width="Auto" Header="Comment"
-                                    DisplayMemberBinding="{Binding Comment, FallbackValue='No comment'}"/>
+                    <GridViewColumn Width="Auto" Header="Strategy"
+                                    DisplayMemberBinding="{Binding Strategy, Mode=OneWay}"/>
+                    <GridViewColumn Width="200" Header="Comment"
+                                    DisplayMemberBinding="{Binding Comment, FallbackValue='No comment'}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ToolTip Content="Test"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -33,60 +47,55 @@
                     </Style>
                     <Style TargetType="{x:Type TextBox}">
                         <Setter Property="Margin" Value="0,2,0,5"/>
+                        <Setter Property="Width" Value="25" />
                     </Style>
                 </StackPanel.Resources>
                 <StackPanel>
                     <TextBlock Text="Castle 1"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleOne}"/>
+                    <TextBox Text="{Binding CastleOne}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 2"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleTwo}"/>
+                    <TextBox Text="{Binding CastleTwo}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 3"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleThree}"/>
+                    <TextBox Text="{Binding CastleThree}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 4"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleFour}"/>
+                    <TextBox Text="{Binding CastleFour}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 5"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleFive}"/>
+                    <TextBox Text="{Binding CastleFive}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 6"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleSix}"/>
+                    <TextBox Text="{Binding CastleSix}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 7"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleSeven}"/>
+                    <TextBox Text="{Binding CastleSeven}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 8"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleEight}"/>
+                    <TextBox Text="{Binding CastleEight}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 9"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleNine}"/>
+                    <TextBox Text="{Binding CastleNine}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Castle 10"/>
-                    <TextBox Width="20" 
-                           Text="{Binding CastleTen}"/>
+                    <TextBox Text="{Binding CastleTen}"/>
                 </StackPanel>
             </StackPanel>
             <Grid Height="Auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
                     <Button Width="50" Margin="20,0,10,0" 
                         Content="Run"
@@ -101,8 +110,35 @@
                     <TextBox Width="40" Margin="5,0,5,0"
                          Text="{Binding Player.Losses}"/>
                 </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <DockPanel>
+                        <Button DockPanel.Dock="Left" Width="40" Margin="3" Content="Sim" Command="{Binding RunSimCommand}"/>
+                        <Grid>
+                            <TextBlock Text="{Binding SimProgress, StringFormat=P6, FallbackValue='0'}" Panel.ZIndex="1"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ProgressBar Margin="3" Value="{Binding SimProgress}" Minimum="0" Maximum="1" />
+                        </Grid>
+                    </DockPanel>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <TextBlock Text="Wins:" VerticalAlignment="Center"/>
+                        <TextBox Width="40" Margin="5,0,5,0" 
+                         Text="{Binding BestWins.Wins}"/>
+                        <TextBlock Text="Ties:" VerticalAlignment="Center"/>
+                        <TextBox Width="40" Margin="5,0,5,0"
+                         Text="{Binding BestWins.Ties}"/>
+                        <TextBlock Text="Losses:" VerticalAlignment="Center"/>
+                        <TextBox Width="40" Margin="5,0,5,0"
+                         Text="{Binding BestWins.Losses}"/>
+                        <TextBlock Text="Strategy:" VerticalAlignment="Center"/>
+                        <TextBox Width="150" Margin="5,0,5,0"
+                         Text="{Binding BestWins.Strategy, Mode=OneWay}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
 
         </StackPanel>
+        <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
+            <local:MultiHistogram DataContext="{Binding MultiHistogramVM}"/>
+        </Grid>
     </Grid>
 </Window>

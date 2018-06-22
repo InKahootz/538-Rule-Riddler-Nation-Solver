@@ -4,17 +4,22 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    internal class Commander
+    public class Commander
     {
+        public Commander(int[] soldiers)
+        {
+            this.Soldiers = soldiers;
+        }
+
         public Commander(string[] fields)
         {
-            this.Soldiers = Array.ConvertAll(fields.Take(10).ToArray(), int.Parse).ToList();
+            this.Soldiers = Array.ConvertAll(fields.Take(10).ToArray(), int.Parse).ToArray();
             this.Comment = fields[10];
         }
 
         public Commander(int[] castles, string comment)
         {
-            this.Soldiers = castles.ToList();
+            this.Soldiers = castles.ToArray();
             this.Comment = comment;
         }
 
@@ -22,7 +27,9 @@
 
         public int Losses { get; set; }
 
-        public List<int> Soldiers { get; set; }
+        public int[] Soldiers { get; set; }
+
+        public string Strategy => String.Join(",", Soldiers);
 
         public int Ties { get; set; }
 
@@ -80,6 +87,13 @@
                     this.Wins++;
                     break;
             }
+        }
+
+        public void ResetRecord()
+        {
+            Losses = 0;
+            Ties = 0;
+            Wins = 0;
         }
     }
 }

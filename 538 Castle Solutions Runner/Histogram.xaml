@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="_538_Rule_Riddler_Nation_Solver.Histogram"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_538_Rule_Riddler_Nation_Solver"
+             xmlns:datavis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:HistogramViewModel, IsDesignTimeCreatable=True}">
+    <Grid Width="500">
+        <chartingToolkit:Chart Background="DarkGray" Title="{Binding Title}">
+            <chartingToolkit:Chart.LegendStyle>
+                <Style TargetType="datavis:Legend">
+                    <Setter Property="Width" Value="0"/>
+                </Style>
+            </chartingToolkit:Chart.LegendStyle>
+            <chartingToolkit:ColumnSeries 
+                DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding ChartValues}" 
+                                          DataPointStyle="{StaticResource MyColumnDataPointStyle}"/>
+        </chartingToolkit:Chart>
+    </Grid>
+    <!--<ItemsControl ItemsSource="{Binding ChartValues}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" Background="DarkGray" Height="150"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Height="{Binding Value}" Width="10" VerticalAlignment="Bottom"
+                                Fill="Orange" Stroke="Gray" />
+                    <TextBlock Grid.Row="1" Text="{Binding Key}" FontSize="6" VerticalAlignment="Bottom"/>
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>-->
+</UserControl>

@@ -6,12 +6,15 @@
 
     using Microsoft.VisualBasic.FileIO;
 
-    internal class Model
+    public class Model
     {
+        private List<Commander> pristineList;
+
         public Model()
         {
             this.Solutions = new List<Commander>();
             this.ParsePlans();
+            PreFight();
         }
 
         public Commander Player { get; set; }
@@ -20,14 +23,20 @@
 
         public List<Commander> TopFive { get; set; }
 
+        public List<Commander> SortedCommanders { get; set; }
+
         public void AddCommander(Commander player)
         {
             this.Player = player;
-            this.Solutions.Add(player);
+            //this.Solutions.Add(player);
         }
 
-        public void Fight()
+        private void PreFight()
         {
+            foreach(var com in Solutions)
+            {
+                com.ResetRecord();
+            }
             for (var i = 0; i < this.Solutions.Count; i++)
             {
                 for (var j = i + 1; j < this.Solutions.Count; j++)
@@ -38,17 +47,37 @@
                 }
             }
 
-            this.TopFive =
+            pristineList = new List<Commander>(Solutions);
+        }
+
+        public void Fight()
+        {
+            if (pristineList != null)
+            {
+                Solutions = new List<Commander>(pristineList).OrderByDescending(c => c.Wins).Take(pristineList.Count / 2).ToList();
+                PreFight();
+            }
+
+            for (var i = 0; i < this.Solutions.Count; i++)
+            {
+                    var player1 = this.Solutions[i];
+                    Player.Compare(player1);
+            }
+        }
+
+        public void GetTopFive()
+        {
+            this.SortedCommanders =
                 this.Solutions.OrderByDescending(c => c.Wins)
                     .ThenBy(c => c.Losses)
                     .ThenBy(c => c.Ties)
-                    .Take(5)
                     .ToList();
+            this.TopFive = this.SortedCommanders.Take(10).ToList();
         }
 
         private void ParsePlans()
         {
-            using (var sr = new StreamReader("castle-solutions.csv"))
+            using (var sr = new StringReader(Properties.Resources.castle_solutions))
             {
                 using (var parser = new TextFieldParser(sr))
                 {
